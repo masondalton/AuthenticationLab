@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Rootbeer } from '../types/Rootbeer';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Rootbeer } from "../types/Rootbeer";
+import { useNavigate } from "react-router-dom";
 
 function CompetitionList({
   selectedContainers,
@@ -18,10 +18,13 @@ function CompetitionList({
     const fetchCompetition = async () => {
       const containerParams = selectedContainers
         .map((cont) => `containers=${encodeURIComponent(cont)}`)
-        .join('&');
+        .join("&");
 
       const response = await fetch(
-        `https://localhost:5000/Competition/GetRootbeers?pageSize=${pageSize}&pageNum=${pageNum}${selectedContainers.length ? `&${containerParams}` : ''}`
+        `https://localhost:5000/Competition/GetRootbeers?pageSize=${pageSize}&pageNum=${pageNum}${selectedContainers.length ? `&${containerParams}` : ""}`,
+        {
+          credentials: "include",
+        }
       );
 
       const data = await response.json();
@@ -47,7 +50,7 @@ function CompetitionList({
                 <strong>Brewery:</strong> {rootbeer.breweryName}
               </li>
               <li className="list-group-item">
-                <strong>Location:</strong> {rootbeer.city}, {rootbeer.state},{' '}
+                <strong>Location:</strong> {rootbeer.city}, {rootbeer.state},{" "}
                 {rootbeer.country}
               </li>
               <li className="list-group-item">

@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import './ContainerFilter.css'; // Assuming you have some CSS for styling
+import { useEffect, useState } from "react";
+import "./ContainerFilter.css"; // Assuming you have some CSS for styling
 
 function ContainerFilter({
   selectedContainers,
@@ -14,7 +14,10 @@ function ContainerFilter({
     const fetchContainers = async () => {
       try {
         const response = await fetch(
-          'https://localhost:5000/Competition/GetContainerTypes'
+          "https://localhost:5000/Competition/GetContainerTypes",
+          {
+            credentials: "include",
+          }
         );
 
         const data = await response.json();
@@ -23,7 +26,7 @@ function ContainerFilter({
         // Automatically check all fetched containers
         setSelectedContainers(data);
       } catch (error) {
-        console.error('Error fetching container types', error);
+        console.error("Error fetching container types", error);
       }
     };
     fetchContainers();
